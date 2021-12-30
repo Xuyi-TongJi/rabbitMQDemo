@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Task implements Runnable{
 
     private static final String QUEUE_NAME = "hello";
-    private final Channel channel = RabbitMQUtils.getChannel();
+    private final Channel channel = RabbitMQUtils.getProducerChannel();
 
     // 从控制台中接收信息
     private String getMessageString() {

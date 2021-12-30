@@ -15,7 +15,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  */
 public class Worker implements Runnable {
     private static final String QUEUE_NAME = "hello";
-    private final Channel channel = RabbitMQUtils.getChannel();
+    private final Channel channel = RabbitMQUtils.getConsumerChannel();
     private final long sleepTime;
     private final int prefetchCount; // 预取值, 信道中允许堆积的消息数
 

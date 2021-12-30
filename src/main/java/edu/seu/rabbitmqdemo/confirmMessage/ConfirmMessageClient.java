@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
  */
 public class ConfirmMessageClient {
 
-    private static final Channel channel = RabbitMQUtils.getChannel();
+    private static final Channel channel = RabbitMQUtils.getConsumerChannel();
     // 批量发送消息的个数
     private static final int MESSAGE_COUNT = 1000;
 

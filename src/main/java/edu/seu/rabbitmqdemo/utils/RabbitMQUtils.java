@@ -11,13 +11,14 @@ public class RabbitMQUtils {
 
     // ConnectionFactory and Connection Singleton
     private static volatile ConnectionFactory connectionFactory;
-    private static volatile Connection connection; // 多个消费者共用一个连接
+    private static volatile Connection consumerConnection; // 多个消费者共用一个连接
+    private static volatile Connection producerConnection;
 
     private RabbitMQUtils() {
+
     }
 
-    public static Channel getChannel() {
-        Channel channel = null;
+    private static void testConnectionFactoryNull() {
         if (connectionFactory == null) {
             synchronized (RabbitMQUtils.class) {
                 if (connectionFactory == null) {
@@ -28,19 +29,54 @@ public class RabbitMQUtils {
                 }
             }
         }
-        if (connection == null) {
+    }
+
+    private static void testProducerFactoryNull() {
+        if (producerConnection == null) {
             synchronized (RabbitMQUtils.class) {
-                if (connection == null) {
+                if (producerConnection == null) {
                     try {
-                        connection = connectionFactory.newConnection();
+                        producerConnection = connectionFactory.newConnection();
                     } catch (IOException | TimeoutException e) {
                         e.printStackTrace();
                     }
                 }
             }
         }
+    }
+
+    private static void testConsumerConnectionNull() {
+        if (consumerConnection == null) {
+            synchronized (RabbitMQUtils.class) {
+                if (consumerConnection == null) {
+                    try {
+                        consumerConnection = connectionFactory.newConnection();
+                    } catch (IOException | TimeoutException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    public static Channel getConsumerChannel() {
+        Channel channel = null;
+        testConnectionFactoryNull();
+        testConsumerConnectionNull();
         try {
-            channel = connection.createChannel();
+            channel = consumerConnection.createChannel();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return channel;
+    }
+
+    public static Channel getProducerChannel() {
+        Channel channel = null;
+        testConnectionFactoryNull();
+        testProducerFactoryNull();
+        try {
+            channel = producerConnection.createChannel();
         } catch (IOException e) {
             e.printStackTrace();
         }
