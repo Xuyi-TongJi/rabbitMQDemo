@@ -11,7 +11,7 @@ public class RabbitMQUtils {
 
     // ConnectionFactory and Connection Singleton
     private static volatile ConnectionFactory connectionFactory;
-    private static volatile Connection connection;
+    private static volatile Connection connection; // 多个消费者共用一个连接
 
     private RabbitMQUtils() {
     }

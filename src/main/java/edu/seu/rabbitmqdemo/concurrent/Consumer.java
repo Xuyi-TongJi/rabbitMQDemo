@@ -14,7 +14,7 @@ public class Consumer implements Runnable {
 
     @Override
     public void run() {
-        Message<String> message = null;
+        Message<String> message;
         while (true) {
             message = this.get();
             deliverCallback(message);
@@ -22,7 +22,7 @@ public class Consumer implements Runnable {
     }
 
     private void deliverCallback(Message<String> message) {
-        System.out.println(message.getData());
+        System.out.println(Thread.currentThread().getName() + ":" +  message.getData());
     }
 
     private Message<String> get() {

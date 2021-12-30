@@ -4,6 +4,7 @@ import com.rabbitmq.client.Channel;
 import edu.seu.rabbitmqdemo.utils.RabbitMQUtils;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 /**
@@ -32,7 +33,8 @@ public class Task implements Runnable{
                 if ("stop".equals(message)) {
                     break;
                 }
-                channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+                channel.basicPublish("", QUEUE_NAME, null,
+                        message.getBytes(StandardCharsets.UTF_8));
             }
         } catch (IOException e) {
             e.printStackTrace();
