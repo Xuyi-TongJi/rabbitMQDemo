@@ -1,5 +1,8 @@
 package edu.seu.rabbitmqdemo;
 
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import edu.seu.rabbitmqdemo.utils.RabbitMQUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.NavigableSet;
@@ -23,5 +26,12 @@ public class TestClass {
                 strings) {
             System.out.println(map.get(str));
         }
+    }
+
+    @Test
+    public void method02() {
+        Channel channel = RabbitMQUtils.getProducerChannel();
+        Channel channel1 = RabbitMQUtils.getProducerChannel();
+        System.out.println(channel1 == channel);
     }
 }
