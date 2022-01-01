@@ -5,8 +5,10 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;
 import edu.seu.rabbitmqdemo.utils.RabbitMQUtils;
 
+import javax.naming.OperationNotSupportedException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 /**
  * 抽象的接收方：模版模式
@@ -35,7 +37,7 @@ public abstract class AbstractReceiveLog implements Runnable{
             // 进行消息的接收
             DeliverCallback deliverCallback = this.deliverCallbackMethod();
             CancelCallback cancelCallback = this.cancelCallbackMethod();
-            channel.basicConsume(queueName, true, deliverCallback, cancelCallback);
+            channel.basicConsume(queueName, false, deliverCallback, cancelCallback);
         } catch (IOException e) {
             e.printStackTrace();
         }

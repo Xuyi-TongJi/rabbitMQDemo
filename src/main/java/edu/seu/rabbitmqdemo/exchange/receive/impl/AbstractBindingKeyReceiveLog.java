@@ -21,13 +21,17 @@ public abstract class AbstractBindingKeyReceiveLog extends AbstractReceiveLog {
     }
 
     @Override
-    protected final String getQueue() {
+    protected String getQueue() {
         try {
             // 根据队列名称声明队列
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             // 绑定BINDING_KEY
             for (String bindingKey: BINDING_KEYS) {
-                channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, bindingKey);
+                try {
+                    channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, bindingKey);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

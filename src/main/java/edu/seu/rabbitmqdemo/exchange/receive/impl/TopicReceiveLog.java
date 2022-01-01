@@ -12,7 +12,7 @@ public class TopicReceiveLog extends AbstractBindingKeyReceiveLog {
     }
 
     @Override
-    protected void exchangeDeclare() {
+    public void exchangeDeclare() {
         try {
             channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
         } catch (IOException e) {

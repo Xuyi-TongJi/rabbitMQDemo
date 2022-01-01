@@ -15,7 +15,7 @@ public class DirectReceiveLog extends AbstractBindingKeyReceiveLog {
     }
 
     @Override
-    protected void exchangeDeclare() {
+    public void exchangeDeclare() {
         try {
             channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
         } catch (IOException e) {

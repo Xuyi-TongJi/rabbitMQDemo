@@ -12,15 +12,6 @@ public class FanoutReceiveLog extends AbstractReceiveLog {
     }
 
     @Override
-    protected void exchangeDeclare() {
-        try {
-            channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.FANOUT);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
     protected String getQueue() {
         try {
             String queueName = channel.queueDeclare().getQueue();
@@ -29,6 +20,15 @@ public class FanoutReceiveLog extends AbstractReceiveLog {
         } catch (IOException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public void exchangeDeclare() {
+        try {
+            channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.FANOUT);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

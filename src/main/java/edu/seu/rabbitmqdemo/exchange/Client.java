@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Client {
     public static void main(String[] args) {
-        topic();
+
     }
 
     private static void fanout() {
@@ -51,4 +51,5 @@ public class Client {
         new Thread(new TopicReceiveLog(EXCHANGE_NAME, "Receive2", QUEUE_2, BindKeys2)).start();
         new Thread(new TopicEmitLog("EMIT", EXCHANGE_NAME)).start();
     }
+
 }
