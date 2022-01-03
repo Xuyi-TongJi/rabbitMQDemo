@@ -1,5 +1,6 @@
 package edu.seu.rabbitmqdemo.config;
 
+import lombok.Getter;
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -13,14 +14,14 @@ import java.util.Map;
  */
 @Configuration
 public class TTLQueueConfig {
-    private static final String X_EXCHANGE = "X";
-    private static final String Y_DEAD_LETTER_EXCHANGE = "Y";
-    private static final String QUEUE_A = "QA";
-    private static final String QUEUE_B = "QB";
-    private static final String QUEUE_DEAD = "QD"; // 死信队列，即延迟队列
-    private static final String BINDING_KEY_A = "XA";
-    private static final String BINDING_KEY_B = "XB";
-    private static final String BINDING_KEY_DEAD = "YD";
+    public static final String X_EXCHANGE = "X";
+    public static final String Y_DEAD_LETTER_EXCHANGE = "Y";
+    public static final String QUEUE_A = "QA";
+    public static final String QUEUE_B = "QB";
+    public static final String QUEUE_DEAD = "QD"; // 死信队列，即延迟队列
+    public static final String BINDING_KEY_A = "XA";
+    public static final String BINDING_KEY_B = "XB";
+    public static final String BINDING_KEY_DEAD = "YD";
 
     @Bean("X_EXCHANGE")
     public DirectExchange xExchange() {

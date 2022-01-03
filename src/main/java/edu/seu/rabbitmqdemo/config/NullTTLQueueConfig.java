@@ -1,5 +1,6 @@
 package edu.seu.rabbitmqdemo.config;
 
+import lombok.Getter;
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -10,10 +11,10 @@ import java.util.Map;
 
 @Configuration
 public class NullTTLQueueConfig {
-    private static final String Y_DEAD_LETTER_EXCHANGE = "Y";
-    private static final String QUEUE_C = "QC";
-    private static final String BINDING_KEY_DEAD = "YD";
-    private static final String BINDING_KEY_C = "XC";
+    public static final String Y_DEAD_LETTER_EXCHANGE = "Y";
+    public static final String QUEUE_C = "QC";
+    public static final String BINDING_KEY_DEAD = "YD";
+    public static final String BINDING_KEY_C = "XC";
 
     @Bean("QUEUE_C")
     public Queue queueC() {
